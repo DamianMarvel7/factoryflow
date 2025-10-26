@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Bill {
+  id                 Int      @id @default(autoincrement())
+  vendorName         String
+  amount             Float
+  paidAmount         Float    @default(0.0)
+  productionProgress Float    @default(0.0)
+  dueDate            DateTime
+  status             String   @default("unpaid")
+  createdAt          DateTime @default(now())
+}
+
+model Inventory {
+  id          Int      @id @default(autoincrement())
+  itemName    String
+  quantity    Int
+  unitPrice   Float
+  lastUpdated DateTime @default(now())
+}
+
+model Ticket {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  priority    String   @default("medium")
+  status      String   @default("open")
+  createdAt   DateTime @default(now())
+}
