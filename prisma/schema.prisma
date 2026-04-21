@@ -15,6 +15,7 @@ model Bill {
   productionProgress Float    @default(0.0)
   dueDate            DateTime
   status             String   @default("unpaid")
+  note               String   @default("")
   createdAt          DateTime @default(now())
 }
 
@@ -22,15 +23,27 @@ model Inventory {
   id          Int      @id @default(autoincrement())
   itemName    String
   quantity    Int
+  unit        String   @default("pcs")
   unitPrice   Float
+  threshold   Int      @default(0)
   lastUpdated DateTime @default(now())
+  createdAt   DateTime @default(now())
 }
 
 model Ticket {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String?
-  priority    String   @default("medium")
-  status      String   @default("open")
-  createdAt   DateTime @default(now())
+  id             Int       @id @default(autoincrement())
+  title          String
+  customerName   String    @default("")
+  orderType      String    @default("Embroidery")
+  quantity       Int       @default(1)
+  unitPrice      Float     @default(0)
+  description    String?
+  priority       String    @default("med")
+  status         String    @default("open")
+  dueDate        DateTime?
+  ownerInitials  String    @default("AR")
+  notes          String    @default("")
+  driveLink      String    @default("")
+  billAttachment String    @default("")
+  createdAt      DateTime  @default(now())
 }

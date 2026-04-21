@@ -19,12 +19,23 @@ export default function BillEditForm({ bill }: BillEditFormProps) {
       }}
       redirectTo="/bills"
     >
-      <EditBillFields />
+      <EditBillFields form={{}} handleChange={() => {}} />
     </FormWrapper>
   );
 }
 
-// ✅ define inline (or you can move to BillEditFields.tsx)
+const labelStyle: React.CSSProperties = {
+  fontSize: 11, fontWeight: 600, color: "var(--text-2)",
+  letterSpacing: 0.3, textTransform: "uppercase", marginBottom: 5, display: "block",
+};
+
+const inputStyle: React.CSSProperties = {
+  display: "block", width: "100%",
+  border: "1px solid var(--border)", borderRadius: 6,
+  padding: "8px 10px", fontSize: 13, outline: "none",
+  background: "#fff", color: "var(--text)", fontFamily: "inherit",
+};
+
 function EditBillFields({
   form,
   handleChange,
@@ -35,31 +46,14 @@ function EditBillFields({
   return (
     <>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Paid Amount
-        </label>
-        <input
-          type="number"
-          name="paidAmount"
-          value={form.paidAmount || ""}
-          onChange={handleChange}
-          className="w-full border rounded p-2"
-        />
+        <label style={labelStyle}>Paid amount (IDR)</label>
+        <input type="number" name="paidAmount"
+          value={form.paidAmount || ""} onChange={handleChange} style={inputStyle}/>
       </div>
-
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Production Progress (%)
-        </label>
-        <input
-          type="number"
-          name="productionProgress"
-          min={0}
-          max={100}
-          value={form.productionProgress || ""}
-          onChange={handleChange}
-          className="w-full border rounded p-2"
-        />
+        <label style={labelStyle}>Production progress (%)</label>
+        <input type="number" name="productionProgress" min={0} max={100}
+          value={form.productionProgress || ""} onChange={handleChange} style={inputStyle}/>
       </div>
     </>
   );
